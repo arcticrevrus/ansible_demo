@@ -1,6 +1,6 @@
 # Ansible Demo for Quantiq
 
-If you wish to try this on a local system, update `ansible_host` in `/host_vars/fedora_target.yml` to a target host, and run
+If you wish to try this on a local system, update `ansible_host` in `/host_vars/fedora_target.yml` to a target host, and from a linux host with ansible installed, run
 
 `ansible-playbook -K -i inventory.yml demo.yml`
 
