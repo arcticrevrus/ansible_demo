@@ -1,0 +1,7 @@
+---
+- hosts:
+    - TARGET
+  roles:
+    - demo
+  become: true
+  become_method: sudo

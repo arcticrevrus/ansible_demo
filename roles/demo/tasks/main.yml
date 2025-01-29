@@ -1,0 +1,35 @@
+---
+- name: Installing Required packages
+  package:
+    name:
+      - httpd
+    state: latest
+
+- name: Copying server files
+  copy:
+    src: www
+    dest: /var
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Copying main.js template
+  template:
+    src: www/html/js/main.js.j2
+    dest: /var/www/html/js/main.js
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Adding http service to firewalld
+  firewalld:
+    service: http
+    state: enabled
+    permanent: true
+    immediate: true
+    offline: true
+
+- name: Starting web service
+  service:
+    name: httpd
+    state: restarted
