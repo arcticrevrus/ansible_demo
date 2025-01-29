@@ -1,12 +1,12 @@
 ---
 - name: Installing Required packages
-  package:
+  ansible.builtin.package:
     name:
       - httpd
-    state: latest
+    state: present
 
 - name: Copying server files
-  copy:
+  ansible.builtin.copy:
     src: www
     dest: /var
     owner: root
@@ -14,7 +14,7 @@
     mode: '0755'
 
 - name: Copying main.js template
-  template:
+  ansible.builtin.template:
     src: www/html/js/main.js.j2
     dest: /var/www/html/js/main.js
     owner: root
@@ -22,7 +22,7 @@
     mode: '0755'
 
 - name: Adding http service to firewalld
-  firewalld:
+  ansible.posix.firewalld:
     service: http
     state: enabled
     permanent: true
@@ -30,6 +30,6 @@
     offline: true
 
 - name: Starting web service
-  service:
+  ansible.builtin.service:
     name: httpd
     state: restarted
